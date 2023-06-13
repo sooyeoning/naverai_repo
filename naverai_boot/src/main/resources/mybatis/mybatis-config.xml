@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- 
+	마이바티스 로그 기록 (스프링연동시 필요x)
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings> 
+	-->
+
+	<!-- 선택: sql-mapping.xml: resultType 지정  -->
+	<typeAliases>
+		<typeAlias type="chatbot.PizzaDTO" alias="pizza"/>
+		
+	</typeAliases>
+
+</configuration>

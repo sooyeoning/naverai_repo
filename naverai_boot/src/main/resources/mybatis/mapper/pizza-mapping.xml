@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="chatbot.PizzaMapper">
+
+<insert id="insertPizza" parameterType="pizza">
+insert into pizza(kind, size, phone, price, ordertime) values(#{kind}, #{size}, #{phone}, #{price}, now());
+</insert>
+
+<!-- 
+<select id="getTotalBoard" resultType="int">
+select count(*) from board
+</select>
+
+전달할 파라미터: 배열이지만 배열 안에 들어갈 형태로 전달 / 배열 반복문 이용 출력
+<select id="boardList" resultType="boarddto" parameterType="int">
+	select * from board order by writingtime desc limit
+	<foreach collection="array" item="num" separator=",">
+		#{num}
+	</foreach>
+</select>
+
+조회수 증가
+<update id="updateViewCount" parameterType="int">
+	update board set viewcount = viewcount+1 where seq=#{seq}
+</update>
+
+게시글 조회
+<select id="selectDetail" parameterType="int" resultType="BoardDTO">
+	select*from board where seq=#{seq}
+</select>
+
+게시글 삭제
+<delete id="deleteBoard" parameterType="int">
+	delete from board where seq=#{seq}
+</delete>
+
+게시글 수정
+<update id="updateBoard" parameterType="boarddto">
+	update board set title=#{title}, contents=#{contents}, writingtime=now() where seq=#{seq}
+</update>
+
+게시글 검색: 컨트롤러에서 HashMap 생성 - 입력받은 데이터 map에 넣어 sql문 실행
+HashMap: "name", "%길동%"
+map.put("colname", "name")
+map.put("colvalue", "%길동%") 
+
+<select id="searchList" parameterType="hashmap" resultType="boarddto">
+	select*from board where
+	<choose>
+	<when test="colname == null">
+	title like #{colvalue} or contents like #{colvalue} or writer like #{colvalue}
+	</when>
+	<otherwise>
+	 ${colname} like #{colvalue}
+	</otherwise>
+	</choose>
+	order by writingtime desc
+</select>
+
+<select id="getSearchBoard" parameterType="hashmap" resultType="int">
+	select count(*) from board where
+	<choose>
+	<when test="colname == null">
+	title like #{colvalue} or contents like #{colvalue} or writer like #{colvalue}
+	</when>
+	<otherwise>
+	 ${colname} like #{colvalue}
+	</otherwise>
+	</choose>
+</select>
+
+board 안에 member 종속, id=primary key 값, result=컬럼
+<resultMap type="board.spring.mybatis.BoardMemberDTO" id="boardwritermap">
+ <id property="seq" column="seq"/>
+ <result property="title" column="title"/>
+ <result property="contents" column="contents"/>
+ <result property="viewcount" column="viewcount"/>
+ <result property="writingtime" column="writingtime"/> 
+ <result property="pw" column="b_pw"/>
+ <association property="member" resultMap="memberMap"/>
+ 일대일 관계: BoardMemberDTO 멤버변수 member <- memberMap 매핑
+ 하나의글-다수작성자 일대다 관계  <collection property="member" resultMap="memberMap"/>
+</resultMap>
+
+<resultMap type="memberdto" id="memberMap">
+ <id property="memberid" column="memberid"/>
+ <result property="name" column="name"/>
+ <result property="phone" column="phone"/>
+ <result property="email" column="email"/>
+ <result property="regtime" column="regtime"/>
+ <result property="pw" column="m_pw"/>
+</resultMap>
+
+dao: public BoardMemberDTO boardWriterInform(int seq)
+<select id="boardWriterInform" parameterType="int" resultMap="boardwritermap">
+	select seq,title,contents,memberid,name,email,phone,regtime, b.pw as b_pw, m.pw m_pw
+	from board b join c_member m
+	on board.writer = c_member.memberid
+	where seq=#{seq}
+</select> -->
+</mapper>
+
